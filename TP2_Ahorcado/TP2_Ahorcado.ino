@@ -55,8 +55,7 @@ int flagBloquearJuego = 1;
 
 void loop()
 {
-	unsigned long millisActual = millis();
-  	
+	  unsigned long millisActual = millis();
   	int valorA0 = analogRead(A0);
   	int botonAhora = leerBoton();
   	if(flagResultado == 0){
@@ -89,8 +88,7 @@ void loop()
        initGuess();
       flagBloquearJuego = 0;
      
-         
-    }
+ }
     if(flagError){
        lcd.setCursor(0,1);
        lcd.print(auxError);
@@ -99,11 +97,9 @@ void loop()
   	borrarError(); 
     }
      
+   if(botonAhora != NO_BOTON && botonAhora != botonAntes && !flagBloquearJuego){
     
-  if(botonAhora != NO_BOTON && botonAhora != botonAntes && !flagBloquearJuego){
-    
-    
-  switch(botonAhora){
+     switch(botonAhora){
       case SUBIR_LETRA:
       changeLetter(1);
       break;
@@ -116,8 +112,6 @@ void loop()
     }
   }
   botonAntes = botonAhora;
-  
-   
 }
 
 void initGuess()
@@ -127,7 +121,7 @@ void initGuess()
     lives = 3;
     finish = 0;
     lettersGuessed = 0;
-	int numRandom = random(0,13);
+	  int numRandom = random(0,13);
     strcpy(wordToGuess,animals[numRandom]);
     initGuesses();
     initDisplayWord();
@@ -157,13 +151,11 @@ void testLetter()
         {
             findLetters();
             flagError = 0;
-          
         }
         else // si la ingrese pide otra letra a ingresar.
         {
             strcpy(auxError,"OTRA");
             flagError = 1;
-          
         }
     }
 }
@@ -212,7 +204,6 @@ int includeGuesses()
 
 void findLetters()
 {
-
     int guessedRight = 0;
     for (int i = 0; i < strlen(wordToGuess); i++)
     {
@@ -233,7 +224,7 @@ void findLetters()
         removeLife(); 
     }
   
-	if (!finish) 
+	  if(!finish) 
     {
         guessesPush();
         alphabetIndex = 0;
@@ -250,15 +241,13 @@ void guessesPush()
             guesses[i] = currentLetter;
             break;
         }
-
     }
 }
 
 void removeLife()
 {
- 
     lives--;
-    if (lives == 0)
+    if(lives == 0)
     {
         strcpy(displayWord,wordToGuess);
         currentLetter = '*';
@@ -270,7 +259,7 @@ void removeLife()
 
 void checkWon()
 {
-    if (lettersGuessed == strlen(wordToGuess))
+    if(lettersGuessed == strlen(wordToGuess))
     {
         currentLetter = '*';
         finish = 1;
@@ -285,7 +274,6 @@ void initGuesses()
     {
         guesses[i] = ' ';
     }
-
 }
 
 void borrarError()
